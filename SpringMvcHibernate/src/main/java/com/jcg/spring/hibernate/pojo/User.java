@@ -7,7 +7,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private String loginName, name, password, type;
+	private String username, name, password, type, userRealName;
 
 	public long getId() {
 		return id;
@@ -18,11 +18,11 @@ public class User implements Serializable {
 	}
 	
 	public String getLogin() {
-		return loginName;
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.loginName = loginName;
+	public void setLogin(String username) {
+		this.username = username;
 	}
 
 
@@ -49,4 +49,14 @@ public class User implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public String getUserRealName() {
+		return userRealName;
+	}
+
+	public void setUserRealName(String userRealName) {
+		this.userRealName = userRealName;
+	}
+	
+	
 }

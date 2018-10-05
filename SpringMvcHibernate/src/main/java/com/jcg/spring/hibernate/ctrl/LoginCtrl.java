@@ -28,9 +28,11 @@ public class LoginCtrl {
 		boolean isValid = authenticateService.findUser(username, password);
 		log.info("Is user valid?= " + isValid);
 
+		ModelAndView mv=new ModelAndView();
+		User u=null;
 		if(isValid) {
 			msg = "Welcome " + username + "!";
-			User u=authenticateService.findUser2(username, password);
+			u=authenticateService.findUser2(username, password);
 			type=u.getType();
 		} else {
 			msg = "Invalid credentials";
@@ -40,7 +42,7 @@ public class LoginCtrl {
 		log.info("What type of user?= " + type);
 		//return new ModelAndView("result", "output", msg);	//output is the attribute
 		
-		ModelAndView mv=new ModelAndView();
+		
 		if(type.equals("student"))
 			mv.setViewName("resultStudent.jsp");
 		else if (type.equals("teacher"))
@@ -51,6 +53,7 @@ public class LoginCtrl {
 		
 		mv.addObject("output", msg);
 		mv.addObject("type", type);
+		mv.addObject("userRealName", u.getUserRealName());
 		
 		return mv;
 	}

@@ -15,5 +15,8 @@
       <property name="type" type="java.lang.String">
          <column name="user_type" />
       </property>
+      <property name="userRealName" type="java.lang.String">
+         <column name="user_realname" />
+      </property>
    </class>
 </hibernate-mapping>
