@@ -44,12 +44,12 @@ public class LoginCtrl {
 		
 		
 		if(type.equals("student"))
-			mv.setViewName("resultStudent.jsp");
+			mv.setViewName("resultStudent");
 		else if (type.equals("teacher"))
-			mv.setViewName("resultTeacher.jsp");
+			mv.setViewName("resultTeacher");
 		else
 			//default to old result
-			mv.setViewName("result.jsp");
+			mv.setViewName("result");
 		
 		mv.addObject("output", msg);
 		mv.addObject("type", type);

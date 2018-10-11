@@ -1,7 +1,7 @@
 
 
 <div class="navbar">
-	<a href="#home">Home</a> <a href="#news">News</a>
+	<a href="resultStudent">Home</a> <a href="studentTimer">News</a>
 	<div class="dropdown">
 		<button class="dropbtn">
 			Dropdown <i class="fa fa-caret-down"></i>
@@ -12,7 +12,7 @@
 	</div>
 	
 	<div style="float:right; padding-top:15px; padding-right:10px; color:#ddd;">
-	Welcome Active Learning Toolset
+	Welcome to Active Learning Toolset
 </div>
 </div>
 
