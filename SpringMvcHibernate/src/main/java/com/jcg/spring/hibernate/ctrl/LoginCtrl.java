@@ -1,5 +1,7 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ public class LoginCtrl {
 
 	// Checks if the user credentials are valid or not.
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
-	public ModelAndView validateUsr(@RequestParam("username")String username,@RequestParam("password")String password) {
+	public ModelAndView validateUsr(@RequestParam("username")String username,@RequestParam("password")String password, HttpSession session) {
 		String msg = "";
 		String type="";
 		boolean isValid = authenticateService.findUser(username, password);
@@ -54,6 +56,11 @@ public class LoginCtrl {
 		mv.addObject("output", msg);
 		mv.addObject("type", type);
 		mv.addObject("userRealName", u.getUserRealName());
+		
+		//session Attributes
+		session.setAttribute("username", username);
+		session.setAttribute("password", password);
+		log.info("sessionID="+session.getId());
 		
 		return mv;
 	}

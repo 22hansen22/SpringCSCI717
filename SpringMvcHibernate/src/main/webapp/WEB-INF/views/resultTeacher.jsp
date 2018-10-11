@@ -11,7 +11,7 @@
 		<div class="container">
 			<h3 id="output_header" class="text-success"><%= request.getAttribute("output") %></h3>
 			<br>
-			Name: ${userRealName
+			Name: ${userRealName}
 		</div>	    
 	</body>
 </html>
