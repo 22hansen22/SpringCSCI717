@@ -28,13 +28,32 @@ public class controller2{
 	    return "studentTimer";
 	}
 	
+	@RequestMapping(value = "/teacherGroup")
+	public String goToSCT2(HttpSession session) {
+		log.info("entro en teacherGroup");
+		log.info("session "+session.getId());
+		//return	new ModelAndView("studentTimer");
+	    return "teacherGroup";
+	}
+	
+	
 	// HOME redirection
 	@RequestMapping(value = "/resultStudent")
-	public ModelAndView goToSCT2(HttpSession session) {
-		log.info("entro en student Timer2x");
-		//return	new ModelAndView("studentTimer");
-		log.info("s1 "+session.getAttribute("username").toString());
-		log.info("s2 "+session.getAttribute("password").toString());
+	public ModelAndView goToSCT3(HttpSession session) {
+		try {
+			log.info("entro en student Timer2x");
+			//return	new ModelAndView("studentTimer");
+			log.info("s1 "+session.getAttribute("username").toString());
+			log.info("s2 "+session.getAttribute("password").toString());
+		}
+		catch(Exception e) {
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("errorPage");
+			return mv;
+		}
+		//if all the info is in the cookie
+		
+		
 		ModelAndView mv=new ModelAndView();
 		User u=authenticateService.findUser2(session.getAttribute("username").toString(), session.getAttribute("password").toString());
 		

@@ -22,10 +22,11 @@ Hi hola
                 <input type="time" id="time" value="00:00">
             </div>
             <hr>
-            <h2>Counting down 15 minutes (900 seconds)</h2>
-            <div id="CountDownTimer" data-timer="900" style="width: 1000px; height: 250px;"></div>
+            <h2>Counting down 1 minute (60 seconds)</h2>
+            <div id="CountDownTimer" data-timer="2" style="width: 1000px; height: 250px;"></div>
             <button class="btn btn-success startTimer">Start Timer</button>
             <button class="btn btn-danger stopTimer">Stop Timer</button>
+            <button class="btn btn-info resetTimer">Reset Timer</button>
             <hr>
             <h2>Time since page was opened</h2>
             <div>
@@ -56,6 +57,11 @@ Hi hola
                 $("#CountDownTimer").TimeCircles().start();
             });
             $(".stopTimer").click(function() {
+                $("#CountDownTimer").TimeCircles().stop();
+            });
+            $(".resetTimer").click(function() {
+            	
+                $("#CountDownTimer").TimeCircles().restart();
                 $("#CountDownTimer").TimeCircles().stop();
             });
 
