@@ -49,4 +49,16 @@ public class AuthService {
 		}
 		return null;
 	}
+	
+	public List<User> listUsers(){
+		String sqlQuery = "from User u where u.type=?";
+	    try {
+		    List<User> listU = (List<User>)hibernateTemplate.find(sqlQuery, "student");
+		    return listU;
+	    }catch(Exception e) {
+			log.error("An error occurred while querying the database", e);	
+	    }
+		return null;
+		
+	}
 }

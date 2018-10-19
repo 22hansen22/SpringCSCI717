@@ -27,14 +27,13 @@ public class controller2{
 		//return	new ModelAndView("studentTimer");
 	    return "studentTimer";
 	}
-	
+	/*
 	@RequestMapping(value = "/teacherGroup")
 	public String goToSCT2(HttpSession session) {
 		log.info("entro en teacherGroup");
 		log.info("session "+session.getId());
-		//return	new ModelAndView("studentTimer");
 	    return "teacherGroup";
-	}
+	}*/
 	
 	
 	// HOME redirection
