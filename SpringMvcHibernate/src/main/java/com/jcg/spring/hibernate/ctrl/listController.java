@@ -1,5 +1,6 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jcg.spring.hibernate.pojo.User;
@@ -34,12 +36,30 @@ public class listController {
 	    return mv;
 	}
 	
-	@RequestMapping(params = "group", method = RequestMethod.POST)
-	public ModelAndView listEmployee2(){    
+	@RequestMapping(value={"/teacherGroup"},params = "group", method = RequestMethod.GET)
+	public ModelAndView listStudents2(@RequestParam("groupSize")String groupSize){    
 		log.info("entro en group Students ");
 	    LinkedList<String> list = getList();
 	    ModelAndView mv = new ModelAndView("teacherGroup");
 	    mv.addObject("lists", list);
+	    
+	    LinkedList<String> listc=(LinkedList)list.clone();
+	    Collections.shuffle(listc);
+	    LinkedList<LinkedList<String>> slist = new LinkedList<LinkedList<String>>();
+	    //int groupSize=3;
+	    int groupSizex=Integer.parseInt(groupSize);
+	    int numGroups=listc.size()/groupSizex;
+	    if (listc.size() % groupSizex >0) numGroups+=1;
+	    for (int i=0; i<numGroups;i++) {
+	    	slist.add(new LinkedList<String>());
+	    }
+	    int counter1=0;
+	    for (int i=0; i<listc.size();i++) {
+	    	slist.get(counter1).add(listc.get(i));
+	    	if(((i+1) % groupSizex)==0)	counter1+=1;
+	    }
+	    mv.addObject("slists", slist);
+
 	
 	    return mv;
 	}

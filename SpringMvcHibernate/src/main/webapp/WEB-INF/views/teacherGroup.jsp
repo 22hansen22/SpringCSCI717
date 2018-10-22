@@ -14,8 +14,6 @@
 Welcome to the teacher group page<br>
 
 <hr>
-
-
 	<div class="wrapper">
 		<div class="one">
 		This is the list of Students in class:<br>
@@ -31,7 +29,7 @@ Welcome to the teacher group page<br>
 		<div class="two">
 			<c:url var="groupPeople" value="teacherGroup/groupPeople" />
 			<form method="GET">
-				<select>
+				<select name="groupSize">
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
@@ -41,8 +39,19 @@ Welcome to the teacher group page<br>
 			</form>
 		</div>
 		
-		<div class="three">Three</div>
-		
+		<div class="three">
+			<c:if test="${not empty slists}">
+			<c:forEach var="rowData" items="${slists}">
+				<div style="float:left; margin-left:15px;">
+				<ul class="list-group-item">
+					<c:forEach var="cellData" varStatus="loop" items="${rowData}">
+						<li class="list-group-item" style="background-color:#ccc;">${cellData}</li>
+					</c:forEach>
+				</ul>
+				</div>
+			</c:forEach>
+		</c:if>
+		</div>
 		<!--  
 		<div class="four">Four</div>
 		<div class="five">Five</div>
