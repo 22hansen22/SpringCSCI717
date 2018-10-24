@@ -27,6 +27,22 @@ public class controller2{
 		//return	new ModelAndView("studentTimer");
 	    return "studentTimer";
 	}
+	
+	@RequestMapping(value = "/exitTicketS")
+	public String goToSCT2(HttpSession session) {
+		log.info("entro en student Exit Ticket Student");
+		log.info("session "+session.getId());
+		//return	new ModelAndView("studentTimer");
+	    return "exitTicketS";
+	}
+	
+	@RequestMapping(value = "/exitTicketT")
+	public String goToSCT3(HttpSession session) {
+		log.info("entro en student Exit Ticket Teacher");
+		log.info("session "+session.getId());
+		//return	new ModelAndView("studentTimer");
+	    return "exitTicketT";
+	}
 	/*
 	@RequestMapping(value = "/teacherGroup")
 	public String goToSCT2(HttpSession session) {
@@ -38,7 +54,7 @@ public class controller2{
 	
 	// HOME redirection
 	@RequestMapping(value = "/resultStudent")
-	public ModelAndView goToSCT3(HttpSession session) {
+	public ModelAndView goToSCTX(HttpSession session) {
 		try {
 			log.info("entro en student Timer2x");
 			//return	new ModelAndView("studentTimer");

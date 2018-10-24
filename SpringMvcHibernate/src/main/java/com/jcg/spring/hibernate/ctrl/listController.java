@@ -59,6 +59,8 @@ public class listController {
 	    	if(((i+1) % groupSizex)==0)	counter1+=1;
 	    }
 	    mv.addObject("slists", slist);
+	    String gmsg="Making groups of "+groupSizex +" people";
+	    mv.addObject("gmsg", gmsg);
 
 	
 	    return mv;

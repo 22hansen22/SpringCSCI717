@@ -11,36 +11,20 @@
 
 </head>
 <body>
-Welcome to the teacher group page<br>
+Hi exit ticket Teacher
 
-<hr>
-	<div class="wrapper">
+Add a new Exit ticket
+<div class="wrapper">
 		<div class="one">
 		This is the list of Students in class:<br>
-			<c:if test="${not empty lists}">
-				<ul class="list-group-item">
-					<c:forEach items="${lists}" var="lists">
-						<li class="list-group-item">${lists}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
 		</div>
 		
 		<div class="two">
 			<c:url var="groupPeople" value="teacherGroup/groupPeople" />
 			<form method="GET">
-				<select name="groupSize">
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
+				<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
 				<button type="submit" class="btn btn-primary" name="group" value="Group">Group Students</button>
 			</form>
-			<c:if test="${not empty gmsg}">
-			<br><br>
-			${gmsg}
-			</c:if>
 		</div>
 		
 		<div class="three">
@@ -57,14 +41,19 @@ Welcome to the teacher group page<br>
 				</div>
 			</c:forEach>
 		</c:if>
+			<c:if test="${not empty show}">
+			<c:url var="groupPeople" value="teacherGroup/groupPeople" />
+			<form method="GET">
+				<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
+				<button type="submit" class="btn btn-primary" name="group" value="Group">Group Students</button>
+			</form>
+			
 		</div>
 		<!--  
 		<div class="four">Four</div>
 		<div class="five">Five</div>
 		<div class="six">Six</div>-->
-	</div>
-
+	</div>     
+        
 </body>
-
-
 </html>

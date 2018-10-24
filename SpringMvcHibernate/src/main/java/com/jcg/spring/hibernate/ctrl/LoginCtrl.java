@@ -36,32 +36,36 @@ public class LoginCtrl {
 			msg = "Welcome " + username + "!";
 			u=authenticateService.findUser2(username, password);
 			type=u.getType();
+			
+			log.info("What type of user?= " + type);
+			//return new ModelAndView("result", "output", msg);	//output is the attribute
+			
+			
+			if(type.equals("student"))
+				mv.setViewName("resultStudent");
+			else if (type.equals("teacher"))
+				mv.setViewName("resultTeacher");
+			else
+				//default to old result
+				mv.setViewName("result");
+			
+			mv.addObject("type", type);
+			mv.addObject("userRealName", u.getUserRealName());
+			
+			//session Attributes
+			session.setAttribute("username", username);
+			session.setAttribute("password", password);
+			log.info("sessionID="+session.getId());
+			
 		} else {
+			log.info("invalid credentials");
 			msg = "Invalid credentials";
 			type="none";
+			mv.setViewName("errorPage");
 		}
 		
-		log.info("What type of user?= " + type);
-		//return new ModelAndView("result", "output", msg);	//output is the attribute
-		
-		
-		if(type.equals("student"))
-			mv.setViewName("resultStudent");
-		else if (type.equals("teacher"))
-			mv.setViewName("resultTeacher");
-		else
-			//default to old result
-			mv.setViewName("result");
 		
 		mv.addObject("output", msg);
-		mv.addObject("type", type);
-		mv.addObject("userRealName", u.getUserRealName());
-		
-		//session Attributes
-		session.setAttribute("username", username);
-		session.setAttribute("password", password);
-		log.info("sessionID="+session.getId());
-		
 		return mv;
 	}
 }

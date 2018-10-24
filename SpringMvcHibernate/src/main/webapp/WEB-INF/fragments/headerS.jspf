@@ -19,16 +19,8 @@
 
 <div class="navbar">
 	<a href="resultStudent">Home</a> 
-	<a href="studentTimer">Timer</a>
-	<a href="teacherGroup">Group Tool</a>
-	<div class="dropdown">
-		<button class="dropbtn">
-			Dropdown <i class="fa fa-caret-down"></i>
-		</button>
-		<div class="dropdown-content">
-			<a href="#">Link 1</a> <a href="#">Link 2</a> <a href="#">Link 3</a>
-		</div>
-	</div>
+	<a href="exitTicketS">Exit Ticket</a>
+	
 	<div
 		style="float: right; padding-top: 15px; padding-right: 10px; color: #ddd;">
 		Welcome to Active Learning Toolset

@@ -7,14 +7,11 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="<c:url value='/static/css/css1.css' />" rel="stylesheet"></link>
+<%@ include file="/WEB-INF/fragments/headerS.jspf" %>
 
 </head>
 <body>
-Error in Page, you must have refresh the page
-<c:if test="${not empty msg}"></c:if>
-Please go back and 
-
-<a href="">login again.</a>
-
+Hi exit ticket Student     
+        
 </body>
 </html>
