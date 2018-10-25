@@ -11,43 +11,38 @@
 
 </head>
 <body>
-Hi exit ticket Teacher
-
-Add a new Exit ticket
 <div class="wrapper">
 		<div class="one">
-		This is the list of Students in class:<br>
+			<form method="GET">
+			<button type="submit" class="btn btn-primary" name="showETInput" value="showETInput">Create a new Exit Ticket</button>
+			</form>
+			<br><br><br>
+			<form method="GET">
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">List exist Tickets</button>
+			</form>
 		</div>
 		
 		<div class="two">
-			<c:url var="groupPeople" value="teacherGroup/groupPeople" />
-			<form method="GET">
-				<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
-				<button type="submit" class="btn btn-primary" name="group" value="Group">Group Students</button>
-			</form>
+			In this section you can write an exit ticket or you can check the results of the exit tickets of the students.
 		</div>
 		
 		<div class="three">
-			<c:if test="${not empty slists}">
-			<c:forEach var="rowData" items="${slists}" varStatus="l1">
-				<div style="float:left; margin-left:15px;">
-				
+			<c:if test="${not empty showETList}">
+			<c:if test="${not empty etList}">
 				<ul class="list-group-item">
-				Group # ${l1.index+1}<br><br>
-					<c:forEach var="cellData" varStatus="loop" items="${rowData}">
-						<li class="list-group-item" style="background-color:#ccc; font-weight: bold;">${cellData}</li>
+					<c:forEach items="${etList}" var="etList">
+						<li class="list-group-item">${etList}</li>
 					</c:forEach>
 				</ul>
-				</div>
-			</c:forEach>
-		</c:if>
-			<c:if test="${not empty show}">
-			<c:url var="groupPeople" value="teacherGroup/groupPeople" />
-			<form method="GET">
-				<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
-				<button type="submit" class="btn btn-primary" name="group" value="Group">Group Students</button>
-			</form>
+			</c:if>
+			</c:if>
 			
+			<c:if test="${not empty showETInput}">
+				<form method="GET">
+					<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
+					<button type="submit" class="btn btn-primary" name="group" value="Group">Group Students</button>
+				</form>
+			</c:if>
 		</div>
 		<!--  
 		<div class="four">Four</div>

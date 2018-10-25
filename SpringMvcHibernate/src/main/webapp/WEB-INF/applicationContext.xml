@@ -13,7 +13,11 @@
    <bean id="sessionFactoryBean" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
       <property name="dataSource" ref="dataSourceBean" />
       <property name="mappingResources">
-         <value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
+		<list>
+	
+			<value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
+			<value>com/jcg/spring/hibernate/pojo/ExitTicketEntry.hbm.xml</value>
+		</list>
       </property>
       <property name="hibernateProperties">
          <props>
@@ -28,6 +32,10 @@
    </bean>
    
    <bean id="authenticateServiceBean" class="com.jcg.spring.hibernate.service.AuthService">
+      <property name="hibernateTemplate" ref="hibernateTemplateBean" />
+   </bean>
+   
+   <bean id="authenticateServiceBean2" class="com.jcg.spring.hibernate.service.ExitTicketService">
       <property name="hibernateTemplate" ref="hibernateTemplateBean" />
    </bean>
 </beans>

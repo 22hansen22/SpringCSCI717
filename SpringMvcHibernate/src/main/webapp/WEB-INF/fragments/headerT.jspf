@@ -18,7 +18,7 @@
 <script type="text/javascript" src="<c:url value='/static/js/TimeCircles.js' />"></script>
 
 <div class="navbar">
-	<a href="resultStudent">Home</a> 
+	<a href="resultTeacher">Home</a> 
 	<a href="studentTimer">Timer</a>
 	<a href="teacherGroup">Group Tool</a>
 	<a href="exitTicketT">Exit Ticket</a>

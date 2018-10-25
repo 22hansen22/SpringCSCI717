@@ -53,10 +53,10 @@ public class controller2{
 	
 	
 	// HOME redirection
-	@RequestMapping(value = "/resultStudent")
+	@RequestMapping(value = { "/resultStudent", "/resultTeacher"})
 	public ModelAndView goToSCTX(HttpSession session) {
 		try {
-			log.info("entro en student Timer2x");
+			log.info("entro en HOME redirection");
 			//return	new ModelAndView("studentTimer");
 			log.info("s1 "+session.getAttribute("username").toString());
 			log.info("s2 "+session.getAttribute("password").toString());
@@ -75,7 +75,11 @@ public class controller2{
 		mv.addObject("output", "Welcome "+ u.getName());
 		mv.addObject("type", u.getType());
 		mv.addObject("userRealName", u.getUserRealName());
-		mv.setViewName("resultStudent");
+		
+		if(u.getType()=="student")
+			mv.setViewName("resultStudent");
+		else
+			mv.setViewName("resultTeacher");
 	    return mv;
 	    //return "resultStudent";
 	}
