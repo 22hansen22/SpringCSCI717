@@ -14,43 +14,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/user")
-public class controller2{
+public class GeneralController{
 
 	@Autowired
 	private AuthService authenticateService;	
-	private static Logger log = Logger.getLogger(controller2.class);
+	private static Logger log = Logger.getLogger(GeneralController.class);
 
 	@RequestMapping(value = "/studentTimer")
 	public String goToSCT1(HttpSession session) {
-		log.info("entro en student Timer2");
+		log.info("go to studentTimer");
 		log.info("session "+session.getId());
-		//return	new ModelAndView("studentTimer");
 	    return "studentTimer";
 	}
 	
 	@RequestMapping(value = "/exitTicketS")
 	public String goToSCT2(HttpSession session) {
-		log.info("entro en student Exit Ticket Student");
+		log.info("entro en Exit Ticket Student");
 		log.info("session "+session.getId());
-		//return	new ModelAndView("studentTimer");
 	    return "exitTicketS";
 	}
 	
 	@RequestMapping(value = "/exitTicketT")
 	public String goToSCT3(HttpSession session) {
-		log.info("entro en student Exit Ticket Teacher");
+		log.info("entro en Exit Ticket Teacher");
 		log.info("session "+session.getId());
 		//return	new ModelAndView("studentTimer");
 	    return "exitTicketT";
-	}
-	/*
-	@RequestMapping(value = "/teacherGroup")
-	public String goToSCT2(HttpSession session) {
-		log.info("entro en teacherGroup");
-		log.info("session "+session.getId());
-	    return "teacherGroup";
-	}*/
-	
+	}	
 	
 	// HOME redirection
 	@RequestMapping(value = { "/resultStudent", "/resultTeacher"})

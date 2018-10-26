@@ -19,7 +19,7 @@ import com.jcg.spring.hibernate.service.AuthService;
 
 @Controller
 @RequestMapping("/user")
-public class listController {
+public class GroupController {
 	
 	@Autowired
 	private AuthService authenticateService;			// This will auto-inject the authentication service into the controller.

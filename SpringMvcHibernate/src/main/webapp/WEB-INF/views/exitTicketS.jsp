@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="<c:url value='/static/css/css1.css' />" rel="stylesheet"></link>
-<%@ include file="/WEB-INF/fragments/headerS.jspf" %>
+<%@ include file="/WEB-INF/fragments/headerStudent.jspf" %>
 
 </head>
 <body>

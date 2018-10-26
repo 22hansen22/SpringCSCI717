@@ -39,17 +39,39 @@ ____________________________
 
 USE springmvc;
 
-DROP TABLE `exitTicket`;
+DROP TABLE `exit_ticket`;
 
-CREATE TABLE `exitTicket` (
+CREATE TABLE `exit_ticket` (
   ticket_id int(11) NOT NULL AUTO_INCREMENT,
-  user_id int(11) NOT NULL,
   title varchar(50) NOT NULL,
-  answer varchar(500) NOT NULL,
+  dateET date NOT NULL,
   PRIMARY KEY (ticket_id)
 );
 
-INSERT INTO `exitTicket` (ticket_id, user_id, title, answer) VALUES (1, 2, 'Class exti Ticket#1', '');
-INSERT INTO `exitTicket` (ticket_id, user_id, title, answer) VALUES (2, 2, 'Class exti Ticket#2', '');
-user
-SELECT * FROM `exitTicket`;
+INSERT INTO `exit_ticket` (ticket_id, title, dateET) VALUES (1, 'Class exit Ticket#1','2018.10.26' );
+INSERT INTO `exit_ticket` (ticket_id, title, dateET) VALUES (2, 'Class exit Ticket#2','2018.10.26');
+SELECT * FROM `exit_ticket`;
+
+________________________________
+
+USE springmvc;
+
+DROP TABLE `userET`;
+
+CREATE TABLE `userET` (
+  answerId int NOT NULL,
+  user_id int NOT NULL,
+  ticket_id int NOT NULL,
+  answer varchar(50) NOT NULL,
+  dateAnswer date,
+  PRIMARY KEY (answerId), 
+  FOREIGN KEY (user_id) REFERENCES user(user_id),
+  FOREIGN KEY (ticket_id) REFERENCES exit_ticket(ticket_id)
+);
+
+INSERT INTO `userET` (answerId, user_id, ticket_id, answer, dateAnswer) VALUES (1,1,1, 'Answer to ticket 1 by user 1','2018.10.26' );
+INSERT INTO `userET` (answerId, user_id, ticket_id, answer, dateAnswer) VALUES (2,1,2, 'Answer to ticket 2 by user 1','2018.10.26' );
+INSERT INTO `userET` (answerId, user_id, ticket_id, answer, dateAnswer) VALUES (3,2,1, 'Answer to ticket 1 by user 2','2018.10.26' );
+INSERT INTO `userET` (answerId, user_id, ticket_id, answer, dateAnswer) VALUES (4,2,2, 'Answer to ticket 2 by user 2','2018.10.26' );
+INSERT INTO `userET` (answerId, user_id, ticket_id, answer, dateAnswer) VALUES (5,3,2, 'Answer to ticket 2 by user 2','2018.10.26' );
+SELECT * FROM `userET`;
