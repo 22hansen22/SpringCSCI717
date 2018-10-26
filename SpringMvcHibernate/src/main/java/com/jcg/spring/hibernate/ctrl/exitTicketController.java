@@ -56,7 +56,7 @@ public class exitTicketController {
 		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
 		    log.info("Im out "+listET.size());
 		    for (int i=0; i<listET.size(); i++) {
-		    	list.add(listET.get(i).getTitle());
+		    	list.add(listET.get(i).getId()+" "+listET.get(i).getTitle());
 		    }
 		    return list;
 	    }catch(Exception e) {

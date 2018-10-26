@@ -18,7 +18,11 @@
 			</form>
 			<br><br><br>
 			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">List exist Tickets</button>
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">Search by Exit Ticket</button>
+			</form>
+			<br><br><br>
+			<form method="GET">
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">Search by User</button>
 			</form>
 		</div>
 		
@@ -29,11 +33,18 @@
 		<div class="three">
 			<c:if test="${not empty showETList}">
 			<c:if test="${not empty etList}">
-				<ul class="list-group-item">
-					<c:forEach items="${etList}" var="etList">
-						<li class="list-group-item">${etList}</li>
-					</c:forEach>
-				</ul>
+					<ul class="list-group-item">
+						<c:forEach items="${etList}" var="etList">
+							<li class="list-group-item">${etList}
+								<div style="float:right;">
+								<form method="GET">
+								<button type="submit" class="btn btn-primary" name="showETList" value="Group">View</button>
+								</form>	
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				
 			</c:if>
 			</c:if>
 			
