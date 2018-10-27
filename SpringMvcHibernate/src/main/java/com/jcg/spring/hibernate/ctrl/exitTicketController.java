@@ -20,7 +20,7 @@ import com.jcg.spring.hibernate.service.ExitTicketService;
 
 @Controller
 @RequestMapping("/user")
-public class ExitTicketController {
+public class exitTicketController {
 	
 	@Autowired
 	private ExitTicketService exitTicketService;			// This will auto-inject the authentication service into the controller.
@@ -37,16 +37,12 @@ public class ExitTicketController {
 	}
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
-	public ModelAndView showETList(@RequestParam("showETList")String messageV){    
+	public ModelAndView showETList(){    
 		log.info("entro en exitTicketT-showETList");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
-	    mv.addObject("showETList", "yes");
+	    mv.addObject("showETList", true);
 	    LinkedList<String> etList = getList();
 	    mv.addObject("etList", etList);
-	    
-	    //create list of Exit Ticket IDs
-	    log.info("value of showETList ->"+ messageV);
-	    
 	    return mv;
 	}
 	
@@ -60,7 +56,7 @@ public class ExitTicketController {
 		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
 		    log.info("Im out "+listET.size());
 		    for (int i=0; i<listET.size(); i++) {
-		    	list.add(listET.get(i).getTitle());
+		    	list.add(listET.get(i).getId()+" "+listET.get(i).getTitle());
 		    }
 		    return list;
 	    }catch(Exception e) {

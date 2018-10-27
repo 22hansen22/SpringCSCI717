@@ -18,11 +18,19 @@
 			</form>
 			<br><br><br>
 			<form method="GET">
+<<<<<<< HEAD
 			<button type="submit" class="btn btn-primary" name="showETList" value="show">Search by Ticket list</button>
 			</form>
 			<br><br><br>
 			<form method="GET">
 			<button type="submit" class="btn btn-primary" name="showETList" value="show2">Search by user list</button>
+=======
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">Search by Exit Ticket</button>
+			</form>
+			<br><br><br>
+			<form method="GET">
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">Search by User</button>
+>>>>>>> refs/remotes/origin/master
 			</form>
 		</div>
 		
@@ -32,6 +40,7 @@
 		
 		<div class="three">
 			<c:if test="${not empty showETList}">
+<<<<<<< HEAD
 				<c:if test="${not empty etList}">
 					<table class="table table-striped table-hover" style="background:#fff;">
 						<thead>
@@ -56,6 +65,22 @@
 						</tbody>
 					</table>
 				</c:if>
+=======
+			<c:if test="${not empty etList}">
+					<ul class="list-group-item">
+						<c:forEach items="${etList}" var="etList">
+							<li class="list-group-item">${etList}
+								<div style="float:right;">
+								<form method="GET">
+								<button type="submit" class="btn btn-primary" name="showETList" value="Group">View</button>
+								</form>	
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				
+			</c:if>
+>>>>>>> refs/remotes/origin/master
 			</c:if>
 			
 			<c:if test="${not empty showETInput}">
