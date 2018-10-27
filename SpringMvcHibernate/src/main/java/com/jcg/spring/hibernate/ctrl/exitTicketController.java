@@ -37,12 +37,13 @@ public class exitTicketController {
 	}
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
-	public ModelAndView showETList(){    
+	public ModelAndView showETList(@RequestParam("showETList") String idTicket){    
 		log.info("entro en exitTicketT-showETList");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
 	    mv.addObject("showETList", true);
 	    LinkedList<String> etList = getList();
 	    mv.addObject("etList", etList);
+	    log.info("param->"+idTicket);
 	    return mv;
 	}
 	
