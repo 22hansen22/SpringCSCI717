@@ -20,7 +20,7 @@ import com.jcg.spring.hibernate.service.ExitTicketService;
 
 @Controller
 @RequestMapping("/user")
-public class exitTicketController {
+public class ExitTicketController {
 	
 	@Autowired
 	private ExitTicketService exitTicketService;			// This will auto-inject the authentication service into the controller.
