@@ -18,11 +18,11 @@
 			</form>
 			<br><br><br>
 			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="show">Search by Ticket list</button>
+			<button type="submit" class="btn btn-primary" name="showETList" value="showET">Search by Ticket list</button>
 			</form>
 			<br><br><br>
 			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="show2">Search by user list</button>
+			<button type="submit" class="btn btn-primary" name="showETList" value="showU">Search by user list</button>
 			</form>
 		</div>
 		
@@ -31,25 +31,30 @@
 		</div>
 		
 		<div class="three">
+		
+		
 			<c:if test="${not empty showETList}">
 				<c:if test="${not empty etList}">
 					<table class="table table-striped table-hover" style="background:#fff;">
 						<thead>
 							<tr>
-								<th>Exit Ticket ID</th>
-								<th>Exit Ticket</th>
+								<th>ID</th>
+								<th>Exit Ticket/User</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${etList}" var="etList" varStatus="loop">
 							<tr>
-								<td>${loop.index+1}</td>
+								<td style="width: 40px;">${loop.index+1}</td>
 								<td>${etList}</td>
 								<td>
+								<div style="float:right;">
 								<form method="GET">
+									<input type="hidden" name="id" value="${loop.index+1}" />
 									<button type="submit" class="btn btn-primary" name="showETList" value="${loop.index+1}">View</button>
 								</form>
+								</div>
 								</td>
 							</tr>
 							</c:forEach>

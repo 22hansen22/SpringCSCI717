@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jcg.spring.hibernate.pojo.ExitTicketEntry;
+import com.jcg.spring.hibernate.pojo.User;
 import com.jcg.spring.hibernate.service.AuthService;
 import com.jcg.spring.hibernate.service.ExitTicketService;
 
@@ -24,7 +25,9 @@ public class ExitTicketController {
 	
 	@Autowired
 	private ExitTicketService exitTicketService;			// This will auto-inject the authentication service into the controller.
-
+	@Autowired
+	private AuthService authenticateService;
+	
 	private static Logger log = Logger.getLogger(AuthService.class);
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETInput", method = RequestMethod.GET)
@@ -37,20 +40,26 @@ public class ExitTicketController {
 	}
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
-	public ModelAndView showETList(@RequestParam("showETList") String idTicket){    
+	public ModelAndView showETList(@RequestParam("showETList") String listType){    
 		log.info("entro en exitTicketT-showETList");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
 	    mv.addObject("showETList", true);
-	    LinkedList<String> etList = getList();
+	    
+	    LinkedList<String> etList=null;
+	    if(listType.equals("showET"))
+	    	etList = getList();
+	    else if(listType.equals("showU"))
+	    	etList = getListUsers();
+	    
 	    mv.addObject("etList", etList);
-	    log.info("param->"+idTicket);
+	    log.info("param->"+listType);
 	    return mv;
 	}
 	
 	private LinkedList<String> getList(){
 	    LinkedList<String> list = new LinkedList<String>();
 	    
-	    //list all users
+	    //list all exit tickets
 	    log.info("Listing all exit tickets");
 
 	    try {
@@ -64,5 +73,31 @@ public class ExitTicketController {
 		    log.error("Listing unsuccesful");
 	    	return null;
 	    }
+	}
+	
+	private LinkedList<String> getListUsers(){
+	    LinkedList<String> list = new LinkedList<String>();
+	    
+	    //list all users
+	    log.info("Listing all users");
+
+	    try {
+		    List<User> listU=authenticateService.listUsers();
+		    log.info("Im out "+listU.size());
+		    for (int i=0; i<listU.size(); i++) {
+		    	list.add(listU.get(i).getUserRealName());
+		    }
+		    return list;
+	    }catch(Exception e) {
+		    log.error("Listing unsuccesful");
+	    	return null;
+	    	
+	    }
+	}
+	
+	private LinkedList<String> getListETbyUser(String id){
+		
+		
+		return null;
 	}
 }

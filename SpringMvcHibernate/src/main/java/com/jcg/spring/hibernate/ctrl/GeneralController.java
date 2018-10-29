@@ -1,5 +1,7 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.jcg.spring.hibernate.pojo.User;
 import com.jcg.spring.hibernate.service.AuthService;
@@ -72,5 +74,11 @@ public class GeneralController{
 			mv.setViewName("resultTeacher");
 	    return mv;
 	    //return "resultStudent";
+	}
+	
+	//logout
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	    return "redirect:/";
 	}
 }

@@ -17,6 +17,7 @@
 	
 			<value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
 			<value>com/jcg/spring/hibernate/pojo/ExitTicketEntry.hbm.xml</value>
+			<value>com/jcg/spring/hibernate/pojo/UserET.hbm.xml</value>
 		</list>
       </property>
       <property name="hibernateProperties">
@@ -36,6 +37,10 @@
    </bean>
    
    <bean id="authenticateServiceBean2" class="com.jcg.spring.hibernate.service.ExitTicketService">
+      <property name="hibernateTemplate" ref="hibernateTemplateBean" />
+   </bean>
+   
+      <bean id="authenticateServiceBean3" class="com.jcg.spring.hibernate.service.UserETService">
       <property name="hibernateTemplate" ref="hibernateTemplateBean" />
    </bean>
 </beans>

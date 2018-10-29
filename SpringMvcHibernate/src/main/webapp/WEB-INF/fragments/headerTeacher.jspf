@@ -22,6 +22,7 @@
 	<a href="studentTimer">Timer</a>
 	<a href="teacherGroup">Group Tool</a>
 	<a href="exitTicketT">Exit Ticket</a>
+	<a href="logout">Logout</a>
 	<div class="dropdown">
 		<button class="dropbtn">
 			Dropdown <i class="fa fa-caret-down"></i>

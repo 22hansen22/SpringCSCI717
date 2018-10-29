@@ -20,7 +20,7 @@
 <div class="navbar">
 	<a href="resultStudent">Home</a> 
 	<a href="exitTicketS">Exit Ticket</a>
-	
+	<a href="logout">Logout</a>
 	<div
 		style="float: right; padding-top: 15px; padding-right: 10px; color: #ddd;">
 		Welcome to Active Learning Toolset
