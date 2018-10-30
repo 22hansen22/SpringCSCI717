@@ -13,4 +13,6 @@
          <column name="dateET" />
       </property>
    </class>
+   
+
 </hibernate-mapping>

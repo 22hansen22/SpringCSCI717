@@ -1,7 +1,7 @@
 package com.jcg.spring.hibernate.pojo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -38,10 +38,10 @@ public class UserET implements Serializable {
 	
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ticket_id")  
-	public ExitTicketEntry getTicket() {
+	public ExitTicketEntry getExitTicketEntry() {
 		return exitTicketEntry;
 	}
-	public void setTicket_id(ExitTicketEntry exitTicketEntry) {
+	public void setExitTicketEntry(ExitTicketEntry exitTicketEntry) {
 		this.exitTicketEntry = exitTicketEntry;
 	}
 	

@@ -57,7 +57,7 @@ public class ExitTicketController {
 	    else if(listType.equals("showU"))
 	    	etList = getListUsers();
 	    
-	    etList=null;
+	    //etList=null;
 	    if (id!=null)
 	    	etList =getListETbyUser(id);
 	    
@@ -116,7 +116,7 @@ public class ExitTicketController {
 		    List<UserET> listETbyUser=userEtService.findExitTicketsByUser(id);
 		    log.info("#of elements in the list-> "+listETbyUser.size());
 		    for (int i=0; i<listETbyUser.size(); i++) {
-		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getTicket().getTitle());
+		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getExitTicketEntry().getTitle());
 		    }
 		    return list;
 	    }catch(Exception e) {

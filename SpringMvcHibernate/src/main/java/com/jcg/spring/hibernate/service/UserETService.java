@@ -53,9 +53,13 @@ public class UserETService {
 	}
 	*/
 	public List<UserET> findExitTicketsByUser(int userId){
-		String sqlQuery = "from UserET u where u.user_id=?";
+		String sqlQuery = "from UserET u where u.user.id=?";	// u where u.user_id=?
 	    try {
+	    	//User ux=new User();
+	    	//ux.setId(userId);
+	    	//User userx = (User) hibernateTemplate.get(User.class, new Integer(userId));
 		    List<UserET> list = (List<UserET>)hibernateTemplate.find(sqlQuery, userId);
+		    //List<UserET> list = (List<UserET>)hibernateTemplate.find(sqlQuery);
 		    return list;
 	    }catch(Exception e) {
 			log.error("An error occurred while querying the database", e);	

@@ -12,9 +12,11 @@
    <!-- Configuring the Hibernate4 Session Factory Bean -->
    <bean id="sessionFactoryBean" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
       <property name="dataSource" ref="dataSourceBean" />
+      <property name="annotatedClasses">
+	       <value>com.jcg.spring.hibernate.pojo.UserET</value>
+   </property>
       <property name="mappingResources">
 		<list>
-	
 			<value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
 			<value>com/jcg/spring/hibernate/pojo/ExitTicketEntry.hbm.xml</value>
 		</list>
