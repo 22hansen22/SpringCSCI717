@@ -1,45 +1,72 @@
 package com.jcg.spring.hibernate.pojo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="userET")
 public class UserET implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int answerId,user_id,ticket_id;
-	private String answer, dateAnswer;
+	private int answerId;
+	private User user;
+	private ExitTicketEntry exitTicketEntry;
+	private String answer;
+	private Date dateAnswer;
 	
+	@Id
+	@GeneratedValue
+	@Column(name="answerId")
 	public int getAnswerId() {
 		return answerId;
 	}
 	public void setAnswerId(int answerId) {
 		this.answerId = answerId;
 	}
-	public int getUser_id() {
-		return user_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")  
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getTicket_id() {
-		return ticket_id;
+	
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id")  
+	public ExitTicketEntry getTicket() {
+		return exitTicketEntry;
 	}
-	public void setTicket_id(int ticket_id) {
-		this.ticket_id = ticket_id;
+	public void setTicket_id(ExitTicketEntry exitTicketEntry) {
+		this.exitTicketEntry = exitTicketEntry;
 	}
-	public String getAnswer() {
+	
+	@Column(name = "answer")
+	public String getAnswer(){
 		return answer;
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public String getDateAnswer() {
+	
+	@Column(name = "dateAnswer")
+    @Temporal(TemporalType.DATE)
+	public Date getDateAnswer() {
 		return dateAnswer;
 	}
-	public void setDateAnswer(String dateAnswer) {
+	public void setDateAnswer(Date dateAnswer) {
 		this.dateAnswer = dateAnswer;
 	}
 	
-	
+	/*
+	 * answerId int NOT NULL,
+  user_id int NOT NULL,
+  ticket_id int NOT NULL,
+  answer varchar(50) NOT NULL,
+  dateAnswer date,*/
 	
 }

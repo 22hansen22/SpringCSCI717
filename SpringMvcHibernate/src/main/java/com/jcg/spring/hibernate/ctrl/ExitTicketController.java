@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jcg.spring.hibernate.pojo.ExitTicketEntry;
 import com.jcg.spring.hibernate.pojo.User;
+import com.jcg.spring.hibernate.pojo.UserET;
 import com.jcg.spring.hibernate.service.AuthService;
 import com.jcg.spring.hibernate.service.ExitTicketService;
+import com.jcg.spring.hibernate.service.UserETService;
 
 @Controller
 @RequestMapping("/user")
@@ -27,6 +29,8 @@ public class ExitTicketController {
 	private ExitTicketService exitTicketService;			// This will auto-inject the authentication service into the controller.
 	@Autowired
 	private AuthService authenticateService;
+	@Autowired
+	private UserETService userEtService;
 	
 	private static Logger log = Logger.getLogger(AuthService.class);
 	
@@ -40,16 +44,22 @@ public class ExitTicketController {
 	}
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
-	public ModelAndView showETList(@RequestParam("showETList") String listType){    
+	public ModelAndView showETList(@RequestParam("showETList") String listType,@RequestParam(value="id", required=false) Integer id){    
 		log.info("entro en exitTicketT-showETList");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
 	    mv.addObject("showETList", true);
 	    
 	    LinkedList<String> etList=null;
-	    if(listType.equals("showET"))
+	    if(listType.equals("showET")) {
 	    	etList = getList();
+	    	log.info("entro en showET");
+	    }
 	    else if(listType.equals("showU"))
 	    	etList = getListUsers();
+	    
+	    etList=null;
+	    if (id!=null)
+	    	etList =getListETbyUser(id);
 	    
 	    mv.addObject("etList", etList);
 	    log.info("param->"+listType);
@@ -95,9 +105,27 @@ public class ExitTicketController {
 	    }
 	}
 	
-	private LinkedList<String> getListETbyUser(String id){
+	private LinkedList<String> getListETbyUser(int id){
+		//id of user
+		LinkedList<String> list = new LinkedList<String>();
+	    
+	    //list all exit tickets
+	    log.info("Listing all exit tickets for an specific user");
+
+	    try {
+		    List<UserET> listETbyUser=userEtService.findExitTicketsByUser(id);
+		    log.info("#of elements in the list-> "+listETbyUser.size());
+		    for (int i=0; i<listETbyUser.size(); i++) {
+		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getTicket().getTitle());
+		    }
+		    return list;
+	    }catch(Exception e) {
+		    log.error("Listing unsuccesful");
+	    	return null;
+	    }
 		
+		//SQL query in the userET table to see which ET that user has
+		//save results in list
 		
-		return null;
 	}
 }
