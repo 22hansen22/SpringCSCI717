@@ -31,7 +31,35 @@
 		</div>
 		
 		<div class="three">
-		
+			<c:if test="${not empty showETList}">
+				<!-- TABLE WITH EXIT TICKETS -->
+				<table class="table table-striped table-hover" style="background:#fff;">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Exit Ticket/User</th>
+								<th></th>
+							</tr>
+						</thead>
+						${headerx}
+						<tbody>
+							<c:forEach items="${etList}" var="etList" varStatus="loop">
+							<tr>
+								<td style="width: 40px;">${loop.index+1}</td>
+								<td>${etList}</td>
+								<td>
+								<div style="float:right;">
+								<form method="GET">
+									<input type="hidden" name="id" value="${loop.index+1}" />
+									<button type="submit" class="btn btn-primary" name="showETList" value="${loop.index+1}">View</button>
+								</form>
+								</div>
+								</td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+			</c:if>
 		
 			<c:if test="${not empty showETList}">
 				<c:if test="${not empty etList}">
