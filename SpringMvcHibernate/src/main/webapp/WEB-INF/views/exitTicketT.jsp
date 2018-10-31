@@ -43,6 +43,7 @@
 								<th></th>
 							</tr>
 						</thead>
+						${headerx}
 						<tbody>
 							<c:forEach items="${etList}" var="etList" varStatus="loop">
 							<tr>

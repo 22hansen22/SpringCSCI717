@@ -50,6 +50,7 @@ public class ExitTicketController {
 	    mv.addObject("showETList", true);
 	    
 	    LinkedList<String> etList=null;
+	    String headerx="";
 	    if(listType.equals("showET")) {
 	    	etList = getList();
 	    	log.info("entro en showET");
@@ -58,10 +59,17 @@ public class ExitTicketController {
 	    	etList = getListUsers();
 	    
 	    //etList=null;
-	    if (id!=null)
+	    if (id!=null) {
 	    	etList =getListETbyUser(id);
+	    	headerx="<thead><tr>\r\n" + 
+	    			"<th>Exit ticket ID</th>\r\n" + 
+	    			"<th>Answer</th>\r\n" + 
+	    			"<th></th>\r\n" + 
+	    			"</tr></thead>";
+	    }
 	    
 	    mv.addObject("etList", etList);
+	    mv.addObject("headerx", headerx);
 	    log.info("param->"+listType);
 	    return mv;
 	}
@@ -116,7 +124,8 @@ public class ExitTicketController {
 		    List<UserET> listETbyUser=userEtService.findExitTicketsByUser(id);
 		    log.info("#of elements in the list-> "+listETbyUser.size());
 		    for (int i=0; i<listETbyUser.size(); i++) {
-		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getExitTicketEntry().getTitle());
+		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getExitTicketEntry().getTitle()
+		    			+" "+listETbyUser.get(i).getAnswer());
 		    }
 		    return list;
 	    }catch(Exception e) {
