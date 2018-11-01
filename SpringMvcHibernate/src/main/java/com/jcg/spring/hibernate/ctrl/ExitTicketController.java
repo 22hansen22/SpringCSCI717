@@ -1,5 +1,6 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,18 +50,19 @@ public class ExitTicketController {
 	    ModelAndView mv = new ModelAndView("exitTicketT");
 	    mv.addObject("showETList", true);
 	    
-	    LinkedList<String> etList=null;
+	    //LinkedList<String> etList=null;
+	    ArrayList<ArrayList<String>> etList=null;
 	    String headerx="";
 	    if(listType.equals("showET")) {
 	    	etList = getList();
 	    	log.info("entro en showET");
 	    }
 	    else if(listType.equals("showU"))
-	    	etList = getListUsers();
+	    	//etList = getListUsers();
 	    
 	    //etList=null;
 	    if (id!=null) {
-	    	etList =getListETbyUser(id);
+	    	//etList =getListETbyUser(id);
 	    }
 	    
 	    mv.addObject("etList", etList);
@@ -69,13 +71,9 @@ public class ExitTicketController {
 	    return mv;
 	}
 	
-	private List<List<String>> getList(){
-	    List<List<String>> list = new List<>();
+	private ArrayList<ArrayList<String>> getList(){
+	    //List<List<String>> list = new List<>();
 	    ArrayList<ArrayList<String>> listOLists = new ArrayList<ArrayList<String>>();
-	    ArrayList<String> singleList = new ArrayList<String>();
-	    singleList.add("hello");
-	    singleList.add("world");
-	    listOLists.add(singleList);
 	    
 	    //list all exit tickets
 	    log.info("Listing all exit tickets");
@@ -84,14 +82,14 @@ public class ExitTicketController {
 		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
 		    log.info("Im out "+listET.size());
 		    for (int i=0; i<listET.size(); i++) {
-		    	LinkedList<String> row = new LinkedList<String>();
+		    	ArrayList<String> row = new ArrayList<String>();
 		    	row.add(Integer.toString(listET.get(i).getId()));
 		    	row.add(listET.get(i).getTitle());
 		    	row.add(listET.get(i).getDateET());
-		    	list.add(row);
-		    	list.add(listET.get(i).getId()+" "+listET.get(i).getTitle()+" "+listET.get(i).getDateET());
+		    	listOLists.add(row);
+		    	//list.add(listET.get(i).getId()+" "+listET.get(i).getTitle()+" "+listET.get(i).getDateET());
 		    }
-		    return list;
+		    return listOLists;
 	    }catch(Exception e) {
 		    log.error("Listing unsuccesful");
 	    	return null;

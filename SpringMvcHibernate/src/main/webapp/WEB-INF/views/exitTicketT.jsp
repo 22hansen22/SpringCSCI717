@@ -44,10 +44,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${etList}" var="etList" varStatus="loop">
+						<c:forEach var="rowData" items="${etList}">
 							<tr>
-								<td style="width: 40px;">${loop.index+1}</td>
-								<td>${etList}</td>
+								<c:forEach var="cellData" varStatus="loop" items="${rowData}">
+									<td><c:out value="${cellData[loop.index]}"></c:out></td>
+									${rowData.id}
+								</c:forEach>
 								<td>
 									<div style="float: right;">
 										<form method="GET">
@@ -62,7 +64,7 @@
 					</tbody>
 				</table>
 			</c:if>
-		
+		<!--  
 			<c:if test="${not empty showETList}">
 				<c:if test="${not empty etList}">
 					<table class="table table-striped table-hover" style="background:#fff;">
@@ -93,7 +95,7 @@
 					</table>
 				</c:if>
 			</c:if>
-			
+			-->
 			<c:if test="${not empty showETInput}">
 				<form method="GET">
 					<input type="text" class="form-control" id="questionExitT" placeholder="Enter question" name="questionExitT">
