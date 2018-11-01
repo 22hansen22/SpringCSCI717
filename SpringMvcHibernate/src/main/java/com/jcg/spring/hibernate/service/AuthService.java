@@ -1,5 +1,6 @@
 package com.jcg.spring.hibernate.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -50,6 +51,7 @@ public class AuthService {
 		return null;
 	}
 	
+	//this should be list students instead
 	public List<User> listUsers(){
 		String sqlQuery = "from User u where u.type=?";
 	    try {
@@ -59,6 +61,20 @@ public class AuthService {
 			log.error("An error occurred while querying the database", e);	
 	    }
 		return null;
-		
+	}
+	
+	public List<Integer> listUserIDs(){
+		List<Integer> listOfUserIDs=new ArrayList();
+		String sqlQuery = "from User u where u.type=?";
+	    try {
+		    List<User> listU = (List<User>)hibernateTemplate.find(sqlQuery, "student");
+		    for(int i=0; i<listU.size();i++) {
+		    	listOfUserIDs.add((int) listU.get(i).getId());
+		    }
+		    return listOfUserIDs;
+	    }catch(Exception e) {
+			log.error("An error occurred while querying the database", e);	
+	    }
+		return null;
 	}
 }

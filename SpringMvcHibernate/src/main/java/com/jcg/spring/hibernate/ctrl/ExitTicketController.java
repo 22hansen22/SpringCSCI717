@@ -1,5 +1,7 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -7,9 +9,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +38,9 @@ public class ExitTicketController {
 	@Autowired
 	private UserETService userEtService;
 	
+	private SessionFactory sessionFactory;
+
+	
 	private static Logger log = Logger.getLogger(AuthService.class);
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETInput", method = RequestMethod.GET)
@@ -40,75 +48,78 @@ public class ExitTicketController {
 		log.info("entro en exitTicketT-showETInput");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
 	    mv.addObject("showETInput", true);
-	
+	    mv.addObject("command", new ExitTicketEntry());
 	    return mv;
+	}
+	
+	@RequestMapping(value = "/exitTicketT/addExitTicket", method = RequestMethod.GET)
+	public String addUser(@ModelAttribute("SpringWeb") ExitTicketEntry exitTicketEntry, ModelMap model) {
+		
+		log.info("entro en insert a new ET");
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM.dd.yyyy");
+		LocalDate localDate = LocalDate.now();
+		exitTicketEntry.setDateET(dtf.format(localDate));
+		
+		exitTicketService.addEntryET(exitTicketEntry);
+		
+		return "redirect:/user/exitTicketT?showETList=showETList";
 	}
 	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
 	public ModelAndView showETList(@RequestParam("showETList") String listType,@RequestParam(value="id", required=false) Integer id){    
 		log.info("entro en exitTicketT-showETList");
 	    ModelAndView mv = new ModelAndView("exitTicketT");
-	    mv.addObject("showETList", true);
+	    mv.addObject("showETList", listType);
 	    
-	    //LinkedList<String> etList=null;
-	    ArrayList<ArrayList<String>> etList=null;
 	    String headerx="";
-	    if(listType.equals("showET")) {
-	    	etList = getList();
-	    	log.info("entro en showET");
+	    if(listType.equals("showETList")) {
+	    	List<ExitTicketEntry> etList = getList();
+	    	mv.addObject("etList", etList);
+    		mv.addObject("countList2", getNumberOfUsersPerET());
 	    }
-	    else if(listType.equals("showU"))
-	    	//etList = getListUsers();
+	    else if(listType.equals("showUserList")) {
+	    	List<User> usersList = getListUsers();
+    		mv.addObject("usersList", usersList);
+    		mv.addObject("countList", getNumberOfETPerUser());
+	    }
+	    else if(listType.equals("showUsersForET")) {
+	    	List<UserET> usersForET = getListUserByET(id);
+	    	mv.addObject("usersForET", usersForET);
+	    }
+	    else if(listType.equals("showETForUser")) {
+	    	List<UserET> etForUsers = getListETByUser(id);
+	    	mv.addObject("etForUsers", etForUsers);
+	    }
 	    
-	    //etList=null;
 	    if (id!=null) {
 	    	//etList =getListETbyUser(id);
 	    }
 	    
-	    mv.addObject("etList", etList);
+	    
 	    mv.addObject("headerx", headerx);
 	    log.info("param->"+listType);
 	    return mv;
 	}
 	
-	private ArrayList<ArrayList<String>> getList(){
-	    //List<List<String>> list = new List<>();
-	    ArrayList<ArrayList<String>> listOLists = new ArrayList<ArrayList<String>>();
-	    
-	    //list all exit tickets
-	    log.info("Listing all exit tickets");
-
+	private List<ExitTicketEntry> getList(){
 	    try {
 		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
 		    log.info("Im out "+listET.size());
-		    for (int i=0; i<listET.size(); i++) {
-		    	ArrayList<String> row = new ArrayList<String>();
-		    	row.add(Integer.toString(listET.get(i).getId()));
-		    	row.add(listET.get(i).getTitle());
-		    	row.add(listET.get(i).getDateET());
-		    	listOLists.add(row);
-		    	//list.add(listET.get(i).getId()+" "+listET.get(i).getTitle()+" "+listET.get(i).getDateET());
-		    }
-		    return listOLists;
+		    return listET;
 	    }catch(Exception e) {
 		    log.error("Listing unsuccesful");
 	    	return null;
 	    }
 	}
 	
-	private LinkedList<String> getListUsers(){
-	    LinkedList<String> list = new LinkedList<String>();
-	    
-	    //list all users
+	private List<User> getListUsers(){
 	    log.info("Listing all users");
 
 	    try {
 		    List<User> listU=authenticateService.listUsers();
 		    log.info("Im out "+listU.size());
-		    for (int i=0; i<listU.size(); i++) {
-		    	list.add(listU.get(i).getUserRealName());
-		    }
-		    return list;
+		    return listU;
 	    }catch(Exception e) {
 		    log.error("Listing unsuccesful");
 	    	return null;
@@ -116,28 +127,41 @@ public class ExitTicketController {
 	    }
 	}
 	
-	private LinkedList<String> getListETbyUser(int id){
-		//id of user
-		LinkedList<String> list = new LinkedList<String>();
-	    
-	    //list all exit tickets
-	    log.info("Listing all exit tickets for an specific user");
-
+	private List<UserET> getListETByUser(int id){
 	    try {
 		    List<UserET> listETbyUser=userEtService.findExitTicketsByUser(id);
-		    log.info("#of elements in the list-> "+listETbyUser.size());
-		    for (int i=0; i<listETbyUser.size(); i++) {
-		    	list.add(listETbyUser.get(i).getUser().getId()+" "+listETbyUser.get(i).getExitTicketEntry().getTitle()
-		    			+" "+listETbyUser.get(i).getAnswer());
-		    }
-		    return list;
+		    return listETbyUser;
 	    }catch(Exception e) {
 		    log.error("Listing unsuccesful");
 	    	return null;
 	    }
-		
-		//SQL query in the userET table to see which ET that user has
-		//save results in list
-		
+	}
+	
+	private List<UserET> getListUserByET(int id){
+	    try {
+		    List<UserET> listETbyUser=userEtService.findUsersByExitTicket(id);
+		    return listETbyUser;
+	    }catch(Exception e) {
+		    log.error("Listing unsuccesful");
+	    	return null;
+	    }
+	}
+	
+	private List<Integer> getNumberOfETPerUser(){
+		List<Integer> output=new ArrayList();
+		List<Integer> l=authenticateService.listUserIDs();
+		for(int i=0;i<l.size(); i++) {
+			output.add(userEtService.countETByUserID(l.get(i)));
+		}
+		return output;
+	}
+	private List<Integer> getNumberOfUsersPerET(){
+		List<Integer> output=new ArrayList();
+		List<Integer> l=exitTicketService.listETIDs();
+		for(int i=0;i<l.size(); i++) {
+			output.add(userEtService.countUsersByETID(l.get(i)));
+		}
+		return output;
 	}
 }
+

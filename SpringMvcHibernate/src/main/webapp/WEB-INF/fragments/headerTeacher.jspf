@@ -3,7 +3,6 @@
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	
 
 <link href="<c:url value='/static/css/TimeCircles.css' />" rel="stylesheet"></link>
 <link href="<c:url value='/static/css/css1.css' />" rel="stylesheet"></link>

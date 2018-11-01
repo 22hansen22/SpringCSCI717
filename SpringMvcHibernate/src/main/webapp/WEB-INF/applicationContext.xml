@@ -31,6 +31,7 @@
    
    <bean id="hibernateTemplateBean" class="org.springframework.orm.hibernate5.HibernateTemplate">
       <property name="sessionFactory" ref="sessionFactoryBean" />
+      <property name="checkWriteOperations" value="false"/> 
    </bean>
    
    <bean id="authenticateServiceBean" class="com.jcg.spring.hibernate.service.AuthService">
