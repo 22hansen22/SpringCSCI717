@@ -61,11 +61,6 @@ public class ExitTicketController {
 	    //etList=null;
 	    if (id!=null) {
 	    	etList =getListETbyUser(id);
-	    	headerx="<thead><tr>\r\n" + 
-	    			"<th>Exit ticket ID</th>\r\n" + 
-	    			"<th>Answer</th>\r\n" + 
-	    			"<th></th>\r\n" + 
-	    			"</tr></thead>";
 	    }
 	    
 	    mv.addObject("etList", etList);
@@ -74,8 +69,13 @@ public class ExitTicketController {
 	    return mv;
 	}
 	
-	private LinkedList<String> getList(){
-	    LinkedList<String> list = new LinkedList<String>();
+	private List<List<String>> getList(){
+	    List<List<String>> list = new List<>();
+	    ArrayList<ArrayList<String>> listOLists = new ArrayList<ArrayList<String>>();
+	    ArrayList<String> singleList = new ArrayList<String>();
+	    singleList.add("hello");
+	    singleList.add("world");
+	    listOLists.add(singleList);
 	    
 	    //list all exit tickets
 	    log.info("Listing all exit tickets");
@@ -84,7 +84,12 @@ public class ExitTicketController {
 		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
 		    log.info("Im out "+listET.size());
 		    for (int i=0; i<listET.size(); i++) {
-		    	list.add(listET.get(i).getId()+" "+listET.get(i).getTitle());
+		    	LinkedList<String> row = new LinkedList<String>();
+		    	row.add(Integer.toString(listET.get(i).getId()));
+		    	row.add(listET.get(i).getTitle());
+		    	row.add(listET.get(i).getDateET());
+		    	list.add(row);
+		    	list.add(listET.get(i).getId()+" "+listET.get(i).getTitle()+" "+listET.get(i).getDateET());
 		    }
 		    return list;
 	    }catch(Exception e) {
