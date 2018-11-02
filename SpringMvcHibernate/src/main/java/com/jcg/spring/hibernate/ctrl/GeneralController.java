@@ -1,10 +1,15 @@
 package com.jcg.spring.hibernate.ctrl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.jcg.spring.hibernate.pojo.ExitTicketEntry;
 import com.jcg.spring.hibernate.pojo.User;
 import com.jcg.spring.hibernate.service.AuthService;
+import com.jcg.spring.hibernate.service.ExitTicketService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,9 @@ public class GeneralController{
 	@Autowired
 	private AuthService authenticateService;	
 	private static Logger log = Logger.getLogger(GeneralController.class);
+	
+	@Autowired
+	private ExitTicketService exitTicketService;	
 
 	@RequestMapping(value = "/studentTimer")
 	public String goToSCT1(HttpSession session) {
@@ -30,10 +38,14 @@ public class GeneralController{
 	}
 	
 	@RequestMapping(value = "/exitTicketS")
-	public String goToSCT2(HttpSession session) {
+	public ModelAndView goToSCT2(HttpSession session) {
 		log.info("entro en Exit Ticket Student");
 		log.info("session "+session.getId());
-	    return "exitTicketS";
+		List<ExitTicketEntry> etList = getList();
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("exitTicketS");
+    	mv.addObject("etList", etList);
+	    return mv;
 	}
 	
 	@RequestMapping(value = "/exitTicketT")
@@ -57,6 +69,7 @@ public class GeneralController{
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("errorPage");
 			return mv;
+			//could use a redirect to login
 		}
 		//if all the info is in the cookie
 		
@@ -68,7 +81,7 @@ public class GeneralController{
 		mv.addObject("type", u.getType());
 		mv.addObject("userRealName", u.getUserRealName());
 		
-		if(u.getType()=="student")
+		if(u.getType().equals("student"))
 			mv.setViewName("resultStudent");
 		else
 			mv.setViewName("resultTeacher");
@@ -80,5 +93,16 @@ public class GeneralController{
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 	    return "redirect:/";
+	}
+	
+	private List<ExitTicketEntry> getList(){
+	    try {
+		    List<ExitTicketEntry> listET=exitTicketService.listExitTickets();
+		    log.info("Im out "+listET.size());
+		    return listET;
+	    }catch(Exception e) {
+		    log.error("Listing unsuccesful");
+	    	return null;
+	    }
 	}
 }

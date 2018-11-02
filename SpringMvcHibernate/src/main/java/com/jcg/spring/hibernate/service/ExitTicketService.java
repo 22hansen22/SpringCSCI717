@@ -1,19 +1,23 @@
 package com.jcg.spring.hibernate.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.Query;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 
 import com.jcg.spring.hibernate.pojo.ExitTicketEntry;
 import com.jcg.spring.hibernate.pojo.User;
+
 
 public class ExitTicketService {
 
@@ -70,5 +74,50 @@ public class ExitTicketService {
 		catch(Exception e) {
 			log.info("error adding an entry in the database->"+e.toString());
 		}
+	}
+	
+//	public boolean deleteById(int id) {
+//		log.info("deleting entry in database");
+//		//hibernateTemplate.save(exitTicketEntry);
+//		ExitTicketEntry et=new ExitTicketEntry();
+//		et.setId(id);
+//		try {
+//			hibernateTemplate.delete(et);
+//			return true;
+//		}
+//		catch(Exception e) {
+//			log.info("error adding an entry in the database->"+e.toString());
+//		}
+//		return false;
+//	}
+//	
+//	public boolean deleteById2(int id) {
+//		
+//		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+//		org.hibernate.query.Query query=session.createQuery("delete ExitTicketEntry where id = :ID");
+//		query.setParameter("ID", id);
+//		
+//		int result = query.executeUpdate();
+//		
+//		return false;
+//		
+//	}
+	
+	public boolean deleteById(Class<?> type, int id) {
+	    Object persistentInstance = hibernateTemplate.load(type, id);
+	    if (persistentInstance != null) {
+	    	hibernateTemplate.delete(persistentInstance);
+	        return true;
+	    }
+	    return false;
+//		try {
+//			ExitTicketEntry et=new ExitTicketEntry();
+//			et.setId(id);
+//			hibernateTemplate.delete(et);
+//			return true;
+//		}catch(Exception e) {
+//			log.error("error deleting Exit Ticket");
+//		}
+//		return false;
 	}
 }

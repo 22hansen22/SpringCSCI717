@@ -18,9 +18,17 @@
 <script type="text/javascript" src="<c:url value='/static/js/TimeCircles.js' />"></script>
 
 <div class="navbar">
-	<a href="resultStudent">Home</a> 
-	<a href="exitTicketS">Exit Ticket</a>
-	<a href="logout">Logout</a>
+	<a href="resultStudent">
+		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		Home</a> 
+	<a href="exitTicketS">
+		<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+		Exit Ticket
+	</a>
+	<a href="logout">
+		<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+		Logout
+	</a>
 	<div
 		style="float: right; padding-top: 15px; padding-right: 10px; color: #ddd;">
 		Welcome to Active Learning Toolset

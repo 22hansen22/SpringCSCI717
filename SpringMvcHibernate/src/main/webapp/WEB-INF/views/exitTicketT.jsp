@@ -68,7 +68,7 @@
 										<form method="GET">
 											<input type="hidden" name="id" value="${rowData.id}" />
 											<button type="submit" class="btn btn-primary"
-												name="deleteET" value="yes">
+												name="showETList" value="deleteItem">
 												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 												
 												</button>
