@@ -4,11 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="<c:url value='/static/css/css1.css' />" rel="stylesheet"></link>
 <%@ include file="/WEB-INF/fragments/headerTeacher.jspf" %>
-
 </head>
 <body>
 Welcome to the teacher group page<br>
@@ -16,7 +12,7 @@ Welcome to the teacher group page<br>
 <hr>
 	<div class="wrapper">
 		<div class="one">
-		This is the list of Students in class:<br>
+		This is the list of Students in class:<br><br>
 			<c:if test="${not empty lists}">
 				<ul class="list-group-item">
 					<c:forEach items="${lists}" var="lists">

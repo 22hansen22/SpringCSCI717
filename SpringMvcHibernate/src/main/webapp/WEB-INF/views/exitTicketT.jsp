@@ -5,21 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="<c:url value='/static/css/css1.css' />" rel="stylesheet"></link>
 <%@ include file="/WEB-INF/fragments/headerTeacher.jspf" %>
-
 </head>
 <body>
 <div class="wrapper">
 		<div class="one">
 			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETInput" value="showETInput">Create a new Exit Ticket</button>
+			<button type="submit" class="btn btn-primary" name="showETInput" value="showETInput">
+			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+			Create a new Exit Ticket</button>
 			</form>
 			<br><br><br>
 			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">Search by Ticket list</button>
+			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">
+			
+			Search by Ticket list</button>
 			</form>
 			<br><br><br>
 			<form method="GET">
@@ -68,9 +68,9 @@
 										<form method="GET">
 											<input type="hidden" name="id" value="${rowData.id}" />
 											<button type="submit" class="btn btn-primary"
-												name="deleteET" value="yes">Delete
-												<ion-icon name="trash"></ion-icon>
-												<image src="<c:url value='/static/trash.svg' />" witdh="5"/>
+												name="deleteET" value="yes">
+												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+												
 												</button>
 										</form>
 									</div>
@@ -87,7 +87,7 @@
 					style="background: #fff;">
 					<thead>
 						<tr>
-							<th>ID#</th>
+							<th>User ID#</th>
 							<th>User Name</th>
 							<th></th>
 						</tr>
