@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation=		"http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/tx
+       						http://www.springframework.org/schema/tx/spring-tx-4.1.xsd " 
+       						xmlns:tx="http://www.springframework.org/schema/tx"
+	>
    
    <!-- Configuring the JDBC connection-->
    <bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -13,22 +20,23 @@
    <bean id="sessionFactoryBean" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
       <property name="dataSource" ref="dataSourceBean" />
       <property name="annotatedClasses">
-	       <value>com.jcg.spring.hibernate.pojo.UserET</value>
-   </property>
-      <property name="mappingResources">
-		<list>
-			<value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
-			<value>com/jcg/spring/hibernate/pojo/ExitTicketEntry.hbm.xml</value>
-		</list>
-      </property>
+      	<list>
+			<value>com.jcg.spring.hibernate.pojo.ExitTicketEntry</value>
+			<value>com.jcg.spring.hibernate.pojo.User</value>
+			<value>com.jcg.spring.hibernate.pojo.UserET</value>
+		</list>  
+   	  </property>
+      
       <property name="hibernateProperties">
          <props>
             <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
             <prop key="hibernate.show_sql">true</prop>
+            <prop key="format_sql">true</prop>
          </props>
       </property>
    </bean>
-   
+
+
    <bean id="hibernateTemplateBean" class="org.springframework.orm.hibernate5.HibernateTemplate">
       <property name="sessionFactory" ref="sessionFactoryBean" />
       <property name="checkWriteOperations" value="false"/> 
@@ -38,11 +46,13 @@
       <property name="hibernateTemplate" ref="hibernateTemplateBean" />
    </bean>
    
-   <bean id="authenticateServiceBean2" class="com.jcg.spring.hibernate.service.ExitTicketService">
+   <bean id="exitTicketServiceBean" class="com.jcg.spring.hibernate.service.ExitTicketService">
       <property name="hibernateTemplate" ref="hibernateTemplateBean" />
    </bean>
    
-      <bean id="authenticateServiceBean3" class="com.jcg.spring.hibernate.service.UserETService">
+   <bean id="userETServiceServiceBean" class="com.jcg.spring.hibernate.service.UserETService">
       <property name="hibernateTemplate" ref="hibernateTemplateBean" />
    </bean>
+   
+   
 </beans>

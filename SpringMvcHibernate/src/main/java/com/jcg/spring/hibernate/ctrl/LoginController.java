@@ -35,7 +35,7 @@ public class LoginController {
 		if(isValid) {
 			msg = "Welcome " + username + "!";
 			u=authenticateService.findUser2(username, password);
-			type=u.getType();
+			type=u.getUser_type();
 			
 			log.info("What type of user?= " + type);
 			//return new ModelAndView("result", "output", msg);	//output is the attribute
@@ -50,7 +50,7 @@ public class LoginController {
 				mv.setViewName("result");
 			
 			mv.addObject("type", type);
-			mv.addObject("userRealName", u.getUserRealName());
+			mv.addObject("userRealName", u.getUser_realname());
 			
 			//session Attributes
 			session.setAttribute("username", username);
@@ -61,7 +61,8 @@ public class LoginController {
 			log.info("invalid credentials");
 			msg = "Invalid credentials";
 			type="none";
-			mv.setViewName("errorPage");
+			//mv.setViewName("errorPage");
+			return new ModelAndView("redirect:/");
 		}
 		
 		

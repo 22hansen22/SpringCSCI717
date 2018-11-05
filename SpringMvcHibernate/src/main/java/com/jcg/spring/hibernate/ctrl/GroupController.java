@@ -77,7 +77,7 @@ public class GroupController {
 		    List<User> listU=authenticateService.listUsers();
 		    log.info("Im out "+listU.size());
 		    for (int i=0; i<listU.size(); i++) {
-		    	list.add(listU.get(i).getUserRealName());
+		    	list.add(listU.get(i).getUser_realname());
 		    }
 		    return list;
 	    }catch(Exception e) {

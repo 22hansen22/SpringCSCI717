@@ -96,7 +96,7 @@
 						<c:forEach var="rowData" items="${usersList}" varStatus="status">
 							<tr>
 								<td>${rowData.id}</td>
-								<td>${rowData.userRealName}
+								<td>${rowData.user_realname}
 								
 								<c:if test="${not empty countList}">
 								<span class="label label-pill label-primary">${countList[status.index]}</span>
@@ -134,7 +134,7 @@
 						<c:forEach var="rowData" items="${usersForET}">
 							<tr>
 								<td>${rowData.user.id}</td>
-								<td>${rowData.user.userRealName}</td>
+								<td>${rowData.user.user_realname}</td>
 								<td>${rowData.answer}</td>
 								<td>${rowData.dateAnswer}</td>
 							</tr>
@@ -159,7 +159,7 @@
 						<c:forEach var="rowData" items="${etForUsers}">
 							<tr>
 								<td>${rowData.user.id}</td>
-								<td>${rowData.user.userRealName}</td>
+								<td>${rowData.user.user_realname}</td>
 								<td>${rowData.answer}</td>
 								<td>${rowData.dateAnswer}</td>
 							</tr>

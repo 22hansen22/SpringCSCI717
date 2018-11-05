@@ -66,9 +66,10 @@ public class GeneralController{
 			log.info("s2 "+session.getAttribute("password").toString());
 		}
 		catch(Exception e) {
-			ModelAndView mv=new ModelAndView();
-			mv.setViewName("errorPage");
-			return mv;
+			//ModelAndView mv=new ModelAndView();
+			//mv.setViewName("errorPage");
+			//return mv;
+			return new ModelAndView("redirect:/");
 			//could use a redirect to login
 		}
 		//if all the info is in the cookie
@@ -77,11 +78,11 @@ public class GeneralController{
 		ModelAndView mv=new ModelAndView();
 		User u=authenticateService.findUser2(session.getAttribute("username").toString(), session.getAttribute("password").toString());
 		
-		mv.addObject("output", "Welcome "+ u.getName());
-		mv.addObject("type", u.getType());
-		mv.addObject("userRealName", u.getUserRealName());
+		mv.addObject("output", "Welcome "+ u.getUser_name());
+		mv.addObject("type", u.getUser_type());
+		mv.addObject("userRealName", u.getUser_realname());
 		
-		if(u.getType().equals("student"))
+		if(u.getUser_type().equals("student"))
 			mv.setViewName("resultStudent");
 		else
 			mv.setViewName("resultTeacher");

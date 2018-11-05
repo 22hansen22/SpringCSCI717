@@ -39,18 +39,8 @@ Hi exit ticket Student
 										<form method="GET">
 											<input type="hidden" name="id" value="${rowData.id}" />
 											<button type="submit" class="btn btn-primary"
-												name="showETList" value="showUsersForET">View Responses</button>
-										</form>
-									</div>
-								</td>
-								<td>
-									<div style="float: right;">
-										<form method="GET">
-											<input type="hidden" name="id" value="${rowData.id}" />
-											<button type="submit" class="btn btn-primary"
-												name="showETList" value="deleteItem">
-												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-												
+												name="showETList" value="editET">
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 										</form>
 									</div>
@@ -59,22 +49,6 @@ Hi exit ticket Student
 						</c:forEach>
 					</tbody>
 				</table>
-				
-			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETInput" value="showETInput">
-			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-			Create a new Exit Ticket</button>
-			</form>
-			<br><br><br>
-			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="showETList">
-			
-			Search by Ticket list</button>
-			</form>
-			<br><br><br>
-			<form method="GET">
-			<button type="submit" class="btn btn-primary" name="showETList" value="showUserList">Search by user list</button>
-			</form>
 		</div>
 		
 		<div class="two">

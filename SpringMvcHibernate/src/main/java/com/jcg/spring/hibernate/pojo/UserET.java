@@ -12,9 +12,9 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name="userET")
 public class UserET implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
-	private int answerId;
+	private long answerId;
 	private User user;
 	private ExitTicketEntry exitTicketEntry;
 	private String answer;
@@ -23,14 +23,14 @@ public class UserET implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="answerId")
-	public int getAnswerId() {
+	public long getAnswerId() {
 		return answerId;
 	}
-	public void setAnswerId(int answerId) {
+	public void setAnswerId(long answerId) {
 		this.answerId = answerId;
 	}
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL )
     @JoinColumn(name = "user_id")  
 	public User getUser() {
 		return user;

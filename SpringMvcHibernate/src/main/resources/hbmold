@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="com.jcg.spring.hibernate.pojo.ExitTicketEntry" table="exit_ticket">
+      <id name="id" type="int">
+         <column name="ticket_id" />
+         <generator class="native" />
+      </id>
+      <property name="title" type="java.lang.String">
+         <column name="title" />
+      </property>
+      <property name="dateET" type="java.lang.String">
+         <column name="dateET" />
+      </property>
+      <set name="userETs" inverse="true" cascade="all">
+            <key column="ticket_id" not-null="true" />
+            <one-to-many class="UserET"/>
+        </set>
+        
+   </class>
+   
+
+</hibernate-mapping>
+
+-----------------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="com.jcg.spring.hibernate.pojo.User" table="USER">
+      <id name="id" type="int">
+         <column name="user_id" />
+         <generator class="native" />
+      </id>
+      <property name="name" type="java.lang.String">
+         <column name="user_name" />
+      </property>
+      <property name="password" type="java.lang.String">
+         <column name="user_password" />
+      </property>
+      <property name="type" type="java.lang.String">
+         <column name="user_type" />
+      </property>
+      <property name="userRealName" type="java.lang.String">
+         <column name="user_realname" />
+      </property>
+      
+      <set name="userETs" inverse="true" cascade="all">
+            <key column="user_id" not-null="true" />
+            <one-to-many class="UserET"/>
+        </set>
+   </class>   
+</hibernate-mapping>
+
+----------------------------------------------
+
+
+<property name="mappingResources">
+		<list>
+			<value>com/jcg/spring/hibernate/pojo/User.hbm.xml</value>
+			<value>com/jcg/spring/hibernate/pojo/ExitTicketEntry.hbm.xml</value>
+		</list>
+      </property>

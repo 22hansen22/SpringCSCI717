@@ -25,7 +25,7 @@
 		<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 		Exit Ticket
 	</a>
-	<a href="logout">
+	<a class="navbar-right" href="logout">
 		<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 		Logout
 	</a>

@@ -20,7 +20,7 @@ public class UserETService {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	public List<UserET> findExitTicketsByUser(int userId){
+	public List<UserET> findExitTicketsByUser(long userId){
 		String sqlQuery = "from UserET u where u.user.id=?";	// u where u.user_id=?
 	    try {
 		    List<UserET> list = (List<UserET>)hibernateTemplate.find(sqlQuery, userId);
@@ -32,7 +32,7 @@ public class UserETService {
 		return null;
 	}
 	
-	public List<UserET> findUsersByExitTicket(int exitTicketId){
+	public List<UserET> findUsersByExitTicket(long exitTicketId){
 		String sqlQuery = "from UserET u where u.exitTicketEntry.id=?";	
 	    try {
 		    List<UserET> list = (List<UserET>)hibernateTemplate.find(sqlQuery, exitTicketId);
@@ -44,12 +44,12 @@ public class UserETService {
 		return null;
 	}
 	
-	public int countETByUserID(int userId){
+	public int countETByUserID(long userId){
 		List<UserET> l=findExitTicketsByUser(userId);
 		return l.size();
 	}
 	
-	public int countUsersByETID(int exitTicketId){
+	public int countUsersByETID(long exitTicketId){
 		List<UserET> l=findUsersByExitTicket(exitTicketId);
 		return l.size();
 	}

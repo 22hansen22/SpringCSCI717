@@ -12,6 +12,11 @@
       <property name="dateET" type="java.lang.String">
          <column name="dateET" />
       </property>
+      <set name="userETs" inverse="true" cascade="all">
+            <key column="ticket_id" not-null="true" />
+            <one-to-many class="UserET"/>
+        </set>
+        
    </class>
    
 

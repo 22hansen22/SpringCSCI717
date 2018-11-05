@@ -18,8 +18,10 @@
       <property name="userRealName" type="java.lang.String">
          <column name="user_realname" />
       </property>
-   </class>
-   
-   
-   
+      
+      <set name="userETs" inverse="true" cascade="all">
+            <key column="user_id" not-null="true" />
+            <one-to-many class="UserET"/>
+        </set>
+   </class>   
 </hibernate-mapping>
