@@ -94,16 +94,11 @@ public class ExitTicketController {
 	    }
 	    else if(listType.equals("deleteItem")) {
 	    	if (id!=null) {
-	    		//List<UserET> etForUsers = getListETByUser(id);
-	    		//return "redirect:/user/exitTicketT?showETList=showETList";
 	    		log.info("entro en delete item-> "+id);
-	    		boolean result = exitTicketService.deleteById(ExitTicketEntry.class, id);
-	    		//boolean result = exitTicketService.deleteById2(id);
-	    		//boolean result = exitTicketService.deleteById(id);
-	    		log.info("deleted?="+result+" ID#="+id);
+	    		exitTicketService.deleteById(ExitTicketEntry.class, id);
+	    		log.info("deleted entry with ID#="+id);
 	    		return new ModelAndView("redirect:/user/exitTicketT?showETList=showETList");
 	    	}
-	    	
 	    }
 	    
 	    

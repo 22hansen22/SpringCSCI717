@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name="USER")
 public class User implements Serializable {
 
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	private long id;
 	private String user_name, user_password, user_type,user_realname;
@@ -42,7 +42,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", orphanRemoval=true)
     public Set<UserET> getUserETs() {
         return userETs;
     }
