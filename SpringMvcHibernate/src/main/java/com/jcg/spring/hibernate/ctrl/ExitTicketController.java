@@ -67,6 +67,23 @@ public class ExitTicketController {
 		return "redirect:/user/exitTicketT?showETList=showETList";
 	}
 	
+//	@RequestMapping(value = "/exitTicketT/deleteExitTicket", method = RequestMethod.GET)
+//	public String deleteUser(@ModelAttribute("SpringWeb") ExitTicketEntry exitTicketEntry, ModelMap model, @RequestParam(value="id", required=false) Integer id) {
+//		
+//		log.info("entro en delete ET");
+//		
+//		exitTicketEntry.setId(id);
+//		
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM.dd.yyyy");
+//		LocalDate localDate = LocalDate.now();
+//		exitTicketEntry.setDateET(dtf.format(localDate));
+//		
+//		exitTicketService.addEntryET(exitTicketEntry);
+//		
+//		return "redirect:/user/exitTicketT?showETList=showETList";
+//	}
+	
+	
 	@RequestMapping(value={"/exitTicketT"},params = "showETList", method = RequestMethod.GET)
 	public ModelAndView showETList(@RequestParam("showETList") String listType,@RequestParam(value="id", required=false) Integer id){    
 		log.info("entro en exitTicketT-showETList");

@@ -15,7 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.service.*;
 import org.jboss.logging.Logger;
 
-
+@Transactional
 public class ExitTicketService {
 
 	private HibernateTemplate hibernateTemplate;
@@ -68,10 +68,13 @@ public class ExitTicketService {
 		}
 	}
 	
-	@Transactional
 	public void deleteById(Class<?> type, long id) {
 		log.info("entro 1 ------");
-		ExitTicketEntry e=(ExitTicketEntry) hibernateTemplate.load(type,id);
-		hibernateTemplate.delete(e);
+		ExitTicketEntry e=(ExitTicketEntry) hibernateTemplate.get(type,id);
+		String temp=e.getTitle();
+		e.setTitle(temp+temp);
+		log.info("set title -"+e.getTitle());
+		hibernateTemplate.saveOrUpdate(e);
+		//hibernateTemplate.delete(e);
 	}
 }
